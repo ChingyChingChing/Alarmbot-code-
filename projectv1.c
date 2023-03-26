@@ -110,3 +110,17 @@ int randomAngle(int lower, int upper)
 	int range = upper - lower;
 	return (rand() % range + lower);
 }
+
+void return_dock(int motor_power)
+{
+	motor[motorA] = motor_power;
+	motor[motorD] = -motor_power;
+	while(getGyroDegrees != 0)
+	{}
+	motor[motorA] = motor[motorD] = 0;
+	wait1Msec(1000);
+	motor[motorA] = motor[motorD] = motor_power/2;
+	while(getSensorValue[S3] == 0)
+	{}
+	motor[motorA] = motor[motorD] = 0;
+}
